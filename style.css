@@ -1,152 +1,76 @@
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap');
-
-*, *::before, *::after{
-    margin: 0;
+* {
     padding: 0;
+    margin: 0;
     box-sizing: border-box;
-}
-
-
-html, body{
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-}
-
-body{
-    display: grid;
-    place-content: center;
-    background:linear-gradient( #153677 ,#4e085f);
-    font-family: 'Orbitron';
-}
-
-.wrapper{
-    background: #fff;
-    border-radius: 15px;
-    filter: drop-shadow(0 2px 5px rgb(0 0 0 / .5));
-}
-
-.stopwatch{
-    position: relative;
-    margin: 50px 35px;
-}
-
-.display{
-    font-size: 5rem;
-    color: #d92525;
-    display: flex;
-    gap: 1rem;
-    white-space: nowrap;
-    flex-flow: row nowrap;
-}
-
-.btn{
+    font-family: "Raleway", sans-serif;
+  }
+  body {
+    height: 100vh;
+    background: linear-gradient(135deg, #8052ec, #d161ff);
+  }
+  html {
+    font-size: 16px;
+  }
+  .wrapper {
     position: absolute;
+    transform: translate(-50%, -50%);
+    top: 50%;
     left: 50%;
-    top: 100%;
-    width: 50px;
-    height: 50px;
+  }
+  .container {
+    width: 70vmin;
+    height: 70vmin;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2vmin;
+  }
+  .button-option {
+    background: #ffffff;
+    height: 22vmin;
+    width: 22vmin;
     border: none;
-    outline: none;
-    cursor: pointer;
-    border-radius: 50%;
-    background-size: 100%;
-    background-position: center;
-    background-repeat: no-repeat;
-}
-
-#reset{
-    background: url("./icons/reset.svg");
-    transform: translate(50%, 50%);
-    transition: transform .3s ease;
-}
-
-label[for="state"]{
-    background: url("./icons/play.svg");
-    transform: translate(-150%, 50%);
-}
-
-#reset:active{
-    transform: translate(50%, 50%) rotate(270deg);
-}
-
-#state:checked ~ label[for="state"]{
-    background: url("./icons/pause.svg");
-}
-
-.digits::before, .digits::after{
-    content: "0";
-    display: inline-block;
+    border-radius: 8px;
+    font-size: 12vmin;
+    color: #d161ff;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  }
+  #restart {
+    font-size: 1.3em;
+    padding: 1em;
+    border-radius: 8px;
+    background-color: #0a0027;
+    color: #ffffff;
+    border: none;
     position: relative;
-    width: 67px;
-    animation: name 0s steps(1) infinite paused;
-}
-
-.mls{
-    font-size: 2rem;
-}
-
-.mls::after{
-    width: 27px;
-    bottom: -50%;
-    animation-name: digit-10;
-    animation-duration: 100ms;
-}
-.mls::before{
-    width: 27px;
-    bottom: -50%;
-    animation-name: digit-10;
-    animation-duration: 1000ms;
-}
-
-.sec::after{
-    animation-name: digit-10;
-    animation-duration: 10s;
-}
-.sec::before{
-    animation-name: digit-6;
-    animation-duration: 60s;
-}
-
-.min::after{
-    animation-name: digit-10;
-    animation-duration: 600s;
-}
-.min::before{
-    animation-name: digit-6;
-    animation-duration: 3600s;
-}
-
-#state:checked ~ .display .digits::before,
-#state:checked ~ .display .digits::after{
-    animation-play-state: running;
-}
-
-@keyframes digit-10{
-    0%{content: '0'}
-    10%{content: '1'}
-    20%{content: '2'}
-    30%{content: '3'}
-    40%{content: '4'}
-    50%{content: '5'}
-    60%{content: '6'}
-    70%{content: '7'}
-    80%{content: '8'}
-    90%{content: '9'}
-    100%{content: '0'}
-}
-
-@keyframes digit-6{
-    0%{content: '0'}
-    16.66667%{content: '1'}
-    33.33333%{content: '2'}
-    50%{content: '3'}
-    66.66667%{content: '4'}
-    83.33333%{content: '5'}
-    100%{content: '0'}
-}
-
-#reset:active ~ .display .digits::before,
-#reset:active ~ .display .digits::after{
-    animation: none;
-}
+    margin: 1.5em auto 0 auto;
+    display: block;
+  }
+  .popup {
+    background: linear-gradient(135deg, #8052ec, #d161ff);
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    display: flex;
+    z-index: 2;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 1em;
+    font-size: 12vmin;
+  }
+  #new-game {
+    font-size: 0.6em;
+    padding: 0.5em 1em;
+    background-color: #0a0027;
+    color: #ffffff;
+    border-radius: 0.2em;
+    border: none;
+  }
+  #message {
+    color: #ffffff;
+    text-align: center;
+    font-size: 1em;
+  }
+  .popup.hide {
+    display: none;
+  }
