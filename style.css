@@ -1,110 +1,152 @@
-*{
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap');
+
+*, *::before, *::after{
     margin: 0;
     padding: 0;
-    font-family: 'poppins' ,sans-serif;
     box-sizing: border-box;
 }
-.container {
-    width: 100%;
-    min-height: 100vh;
-    background: linear-gradient( #153677 ,#4e085f);
-    padding: 10px;
 
-}
-.todo-app{
+
+html, body{
     width: 100%;
-    max-width: 540px;
+    height: 100%;
+    overflow: hidden;
+}
+
+body{
+    display: grid;
+    place-content: center;
+    background:linear-gradient( #153677 ,#4e085f);
+    font-family: 'Orbitron';
+}
+
+.wrapper{
     background: #fff;
-    margin: 100px auto 20px;
-    padding: 40px 30px 70px;
-    border-radius: 10px;
+    border-radius: 15px;
+    filter: drop-shadow(0 2px 5px rgb(0 0 0 / .5));
+}
 
-}
-.todo-app h2{
-    color: #002765;
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
-
- 
-}
-.todo-app h2 img{
-    width: 3opx;
-    margin-left: 10px;
-}
-.row{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: #edeef0;
-    border-radius: 30px;
-    padding-left: 20px;
-    margin-bottom: 25px;
-    
-}
-input{
-    flex: 1;
-    border: none;
-    outline: none;
-    background: transparent;
-    padding: 10px;
-    font-weight: 14px;
-}
-button{
-    border: none;
-    outline: none;
-    padding: 16px 50px;
-    background: #ff5945;
-    color: #fff;
-    font-size: 16px;
-    cursor: pointer;
-    border-radius: 40px;
-    
-}
-ul li{
-    list-style: none;
-    font-size: 17px;
-    padding: 12px 8px 12px 50px;
-    user-select: none;
-    cursor: pointer;
+.stopwatch{
     position: relative;
+    margin: 50px 35px;
 }
 
-ul li::before{
-    content: '';
+.display{
+    font-size: 5rem;
+    color: #d92525;
+    display: flex;
+    gap: 1rem;
+    white-space: nowrap;
+    flex-flow: row nowrap;
+}
+
+.btn{
     position: absolute;
-    height: 28px; 
-    width: 28px;
+    left: 50%;
+    top: 100%;
+    width: 50px;
+    height: 50px;
+    border: none;
+    outline: none;
+    cursor: pointer;
     border-radius: 50%;
-    background-image: url(To-Do-Img/images/unchecked.png);
-    background-size:cover;
+    background-size: 100%;
     background-position: center;
-    top: 12px;
-    left: 8px;
-
-
+    background-repeat: no-repeat;
 }
-ul li.checked{
-    color: #555;
-    text-decoration: line-through; 
 
+#reset{
+    background: url("./icons/reset.svg");
+    transform: translate(50%, 50%);
+    transition: transform .3s ease;
 }
-ul li.checked::before{
-    background-image: url(To-Do-Img/images/checked.png );
-}
-ul li span{
-    position: absolute;
-    right: 0;
-    top: 5px;
-    width: 40px;
-    height: 40px;
-    font-size: 22px;
-    color:#555;
-    line-height: 40px;
-    text-align: end;
-    border-radius: 50%;
-}
-ul li span:hover{
-    background: rgb(234, 96, 96);
 
+label[for="state"]{
+    background: url("./icons/play.svg");
+    transform: translate(-150%, 50%);
+}
+
+#reset:active{
+    transform: translate(50%, 50%) rotate(270deg);
+}
+
+#state:checked ~ label[for="state"]{
+    background: url("./icons/pause.svg");
+}
+
+.digits::before, .digits::after{
+    content: "0";
+    display: inline-block;
+    position: relative;
+    width: 67px;
+    animation: name 0s steps(1) infinite paused;
+}
+
+.mls{
+    font-size: 2rem;
+}
+
+.mls::after{
+    width: 27px;
+    bottom: -50%;
+    animation-name: digit-10;
+    animation-duration: 100ms;
+}
+.mls::before{
+    width: 27px;
+    bottom: -50%;
+    animation-name: digit-10;
+    animation-duration: 1000ms;
+}
+
+.sec::after{
+    animation-name: digit-10;
+    animation-duration: 10s;
+}
+.sec::before{
+    animation-name: digit-6;
+    animation-duration: 60s;
+}
+
+.min::after{
+    animation-name: digit-10;
+    animation-duration: 600s;
+}
+.min::before{
+    animation-name: digit-6;
+    animation-duration: 3600s;
+}
+
+#state:checked ~ .display .digits::before,
+#state:checked ~ .display .digits::after{
+    animation-play-state: running;
+}
+
+@keyframes digit-10{
+    0%{content: '0'}
+    10%{content: '1'}
+    20%{content: '2'}
+    30%{content: '3'}
+    40%{content: '4'}
+    50%{content: '5'}
+    60%{content: '6'}
+    70%{content: '7'}
+    80%{content: '8'}
+    90%{content: '9'}
+    100%{content: '0'}
+}
+
+@keyframes digit-6{
+    0%{content: '0'}
+    16.66667%{content: '1'}
+    33.33333%{content: '2'}
+    50%{content: '3'}
+    66.66667%{content: '4'}
+    83.33333%{content: '5'}
+    100%{content: '0'}
+}
+
+#reset:active ~ .display .digits::before,
+#reset:active ~ .display .digits::after{
+    animation: none;
 }
